@@ -44,10 +44,10 @@ class WeeklyReportCrudController extends CrudController
         $this->crud->enableExportButtons();
         CRUD::column('user_id')->type('select')->entity('userId')->attribute('name')->model('App\Models\User');
         CRUD::column('position_id')->type('select')->entity('positionId')->attribute('name')->model('App\Models\Position');
+        CRUD::column('created_at')->type('text')->label('Timestamp');
         CRUD::column('roadblock')->type('text');
         CRUD::column('issue')->type('text');
         CRUD::column('improvement')->type('text');
-        CRUD::column('created_at')->type('text')->label('Timestamp');
         CRUD::column('recomendation')->type('text');
         CRUD::column('newdevelop')->type('table')->columns([
             'what' => 'What is that',

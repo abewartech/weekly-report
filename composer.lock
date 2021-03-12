@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7a8cad19e23938bce7a88a6a7319a676",
+    "content-hash": "f44bad5b00f9c2f2705d8ced4ef7cadf",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -5464,6 +5464,70 @@
         }
     ],
     "packages-dev": [
+        {
+            "name": "backpack/generators",
+            "version": "v3.1.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Laravel-Backpack/Generators.git",
+                "reference": "dec8b6fd350ba0768d964b470393d1fcd478e9b6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Laravel-Backpack/Generators/zipball/dec8b6fd350ba0768d964b470393d1fcd478e9b6",
+                "reference": "dec8b6fd350ba0768d964b470393d1fcd478e9b6",
+                "shasum": ""
+            },
+            "require": {
+                "backpack/crud": "4.1.*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.0||^7.0",
+                "scrutinizer/ocular": "~1.1"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Backpack\\Generators\\GeneratorsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Backpack\\Generators\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "Cristian Tone",
+                    "email": "cristitone@outlook.com",
+                    "homepage": "http://updivision.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Generate files for laravel projects",
+            "homepage": "https://github.com/laravel-backpack/generators",
+            "keywords": [
+                "config",
+                "generators",
+                "model",
+                "request",
+                "view"
+            ],
+            "support": {
+                "issues": "https://github.com/Laravel-Backpack/Generators/issues",
+                "source": "https://github.com/Laravel-Backpack/Generators/tree/v3.1.7"
+            },
+            "time": "2021-02-08T06:04:06+00:00"
+        },
         {
             "name": "doctrine/instantiator",
             "version": "1.4.0",

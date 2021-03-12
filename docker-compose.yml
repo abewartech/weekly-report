@@ -1,0 +1,86 @@
+# For more information: https://laravel.com/docs/sail
+version: '3'
+services:
+    laravel.test:
+        build:
+            context: ./vendor/laravel/sail/runtimes/8.0
+            dockerfile: Dockerfile
+            args:
+                WWWGROUP: '${WWWGROUP}'
+        image: sail-8.0/app
+        restart: always
+        ports:
+            - '${APP_PORT:-80}:80'
+        environment:
+            WWWUSER: '${WWWUSER}'
+            LARAVEL_SAIL: 1
+            TZ: "UTC"
+        volumes:
+            - '.:/var/www/html'
+        networks:
+            - sail
+        depends_on:
+            - mysql
+    mysql:
+        image: 'mysql:8.0'
+        command: --default-authentication-plugin=mysql_native_password
+        restart: always
+        ports:
+            - '${FORWARD_DB_PORT:-3306}:3306'
+        environment:
+            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_DATABASE: '${DB_DATABASE}'
+            MYSQL_USER: '${DB_USERNAME}'
+            MYSQL_PASSWORD: '${DB_PASSWORD}'
+        volumes:
+            - 'sailmysql:/var/lib/mysql'
+        networks:
+            - sail
+        healthcheck:
+          test: ["CMD", "mysqladmin", "ping"]
+    redis:
+        image: 'redis:alpine'
+        restart: always
+        ports:
+            - '${FORWARD_REDIS_PORT:-6379}:6379'
+        volumes:
+            - 'sailredis:/data'
+        networks:
+            - sail
+        healthcheck:
+          test: ["CMD", "redis-cli", "ping"]
+    node-red:
+        image: nodered/node-red:latest
+        restart: always
+        environment:
+            TZ: "UTC"
+        ports:
+            - "1880:1880"
+        networks:
+            - sail
+        depends_on:
+            - mysql
+        volumes:
+            - node-red-data:/data
+    myadmin:
+        image: 'phpmyadmin:latest'
+        ports:
+          - 8080:80
+        environment:
+          MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+        links:
+          - "mysql:db"
+        depends_on:
+          - mysql
+        networks:
+          - sail
+networks:
+    sail:
+        driver: bridge
+volumes:
+    sailmysql:
+        driver: local
+    sailredis:
+        driver: local
+    node-red-data:
+        driver: local

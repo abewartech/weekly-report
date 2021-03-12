@@ -13,13 +13,13 @@ class GprmcMsg extends Migration
      */
     public function up()
     {
-        Schema::create('gprmc_msg', function (Blueprint $table) {
-            $table->bigInteger('msg_id');
-            $table->longText('msg_text');
-            $table->integer('msg_source');
-            $table->tinyInteger('msg_decode_status');
-            $table->timestamp('msg_received')->nullable();
-        });
+        // Schema::create('gprmc_msg', function (Blueprint $table) {
+        //     $table->bigInteger('msg_id');
+        //     $table->longText('msg_text');
+        //     $table->integer('msg_source');
+        //     $table->tinyInteger('msg_decode_status');
+        //     $table->timestamp('msg_received')->nullable();
+        // });
     }
 
     /**
@@ -29,6 +29,6 @@ class GprmcMsg extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('gprmc_msg');
+        // Schema::dropIfExists('gprmc_msg');
     }
 }

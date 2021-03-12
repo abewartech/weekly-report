@@ -13,13 +13,13 @@ class AisDestination extends Migration
      */
     public function up()
     {
-        Schema::create('ais_destination', function (Blueprint $table) {
-            $table->id();
-            $table->integer('ship_id');
-            $table->string('destination');
-            $table->string('eta');
-            $table->dateTime('updated_at')->nullable();
-        });
+        // Schema::create('ais_destination', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->integer('ship_id');
+        //     $table->string('destination');
+        //     $table->string('eta');
+        //     $table->dateTime('updated_at')->nullable();
+        // });
     }
 
     /**
@@ -29,6 +29,6 @@ class AisDestination extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ais_destination');
+        // Schema::dropIfExists('ais_destination');
     }
 }

@@ -13,17 +13,17 @@ class BstMbs extends Migration
      */
     public function up()
     {
-        Schema::create('bst_mbs', function (Blueprint $table) {
-            $table->id();
-            $table->integer('station_id');
-            $table->decimal('latitude', 10, 8);
-            $table->decimal('longitude', 11, 8);
-            $table->float('heading');
-            $table->float('sog');
-            $table->float('cog');
-            $table->timestamp('updated_at')->nullable();
-            $table->string('time_stamp', 30)->nullable();
-        });
+        // Schema::create('bst_mbs', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->integer('station_id');
+        //     $table->decimal('latitude', 10, 8);
+        //     $table->decimal('longitude', 11, 8);
+        //     $table->float('heading');
+        //     $table->float('sog');
+        //     $table->float('cog');
+        //     $table->timestamp('updated_at')->nullable();
+        //     $table->string('time_stamp', 30)->nullable();
+        // });
     }
 
     /**
@@ -33,6 +33,6 @@ class BstMbs extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bst_mbs');
+        // Schema::dropIfExists('bst_mbs');
     }
 }

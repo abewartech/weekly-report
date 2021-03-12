@@ -13,13 +13,13 @@ class AivdmMsg extends Migration
      */
     public function up()
     {
-        Schema::create('aivdm_msg', function (Blueprint $table) {
-            $table->bigInteger('msg_id');
-            $table->longText('msg_text');
-            $table->integer('msg_source');
-            $table->tinyInteger('msg_decode_status');
-            $table->timestamp('msg_received')->nullable();
-        });
+        // Schema::create('aivdm_msg', function (Blueprint $table) {
+        //     $table->bigInteger('msg_id');
+        //     $table->longText('msg_text');
+        //     $table->integer('msg_source');
+        //     $table->tinyInteger('msg_decode_status');
+        //     $table->timestamp('msg_received')->nullable();
+        // });
     }
 
     /**
@@ -29,6 +29,6 @@ class AivdmMsg extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('aivdm_msg');
+        // Schema::dropIfExists('aivdm_msg');
     }
 }

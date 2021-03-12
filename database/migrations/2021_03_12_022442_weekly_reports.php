@@ -13,7 +13,21 @@ class WeeklyReports extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('weekly_reports', function (Blueprint $table) {
+            $table->id();
+            $table->integer('user_id');
+            $table->integer('position_id');
+            $table->string('roadblock');
+            $table->string('issue');
+            $table->string('improvement');
+            $table->string('recomendation');
+            $table->longText('newdevelop');
+            $table->longText('additionalreq');
+            $table->longText('developpipeline');
+            $table->longText('activitiespastweek');
+            $table->longText('activitiesnextweek');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +37,6 @@ class WeeklyReports extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('weekly_reports');
     }
 }

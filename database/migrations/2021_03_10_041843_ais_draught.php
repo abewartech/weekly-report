@@ -13,12 +13,12 @@ class AisDraught extends Migration
      */
     public function up()
     {
-        Schema::create('ais_draught', function (Blueprint $table) {
-            $table->id();
-            $table->integer('ship_id');
-            $table->float('draught');
-            $table->dateTime('updated_at')->nullable();
-        });
+        // Schema::create('ais_draught', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->integer('ship_id');
+        //     $table->float('draught');
+        //     $table->dateTime('updated_at')->nullable();
+        // });
     }
 
     /**
@@ -28,6 +28,6 @@ class AisDraught extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ais_draught');
+        // Schema::dropIfExists('ais_draught');
     }
 }

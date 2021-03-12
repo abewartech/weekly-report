@@ -26,7 +26,10 @@ class WeeklyReportRequest extends FormRequest
     public function rules()
     {
         return [
-            // 'name' => 'required|min:5|max:255'
+            'user_id' => 'required',
+            'position_id' => 'required',
+            'activitiespastweek' => 'required',
+            'activitiesnextweek' => 'required',
         ];
     }
 

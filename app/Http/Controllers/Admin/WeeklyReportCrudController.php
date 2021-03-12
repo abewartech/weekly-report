@@ -21,36 +21,59 @@ class WeeklyReportCrudController extends CrudController
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
-     * 
+     *
      * @return void
      */
     public function setup()
     {
         CRUD::setModel(\App\Models\WeeklyReport::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/weeklyreport');
-        CRUD::setEntityNameStrings('weeklyreport', 'weekly_reports');
+        CRUD::setEntityNameStrings('weekly report', 'weekly reports');
     }
 
     /**
      * Define what happens when the List operation is loaded.
-     * 
+     *
      * @see  https://backpackforlaravel.com/docs/crud-operation-list-entries
      * @return void
      */
     protected function setupListOperation()
     {
-        CRUD::setFromDb(); // columns
-
-        /**
-         * Columns can be defined using the fluent syntax or array syntax:
-         * - CRUD::column('price')->type('number');
-         * - CRUD::addColumn(['name' => 'price', 'type' => 'number']); 
-         */
+        CRUD::column('user_id')->type('select')->entity('userId')->attribute('name')->model('App\Models\User');
+        CRUD::column('position_id')->type('select')->entity('positionId')->attribute('name')->model('App\Models\Position');
+        CRUD::column('roadblock')->type('text');
+        CRUD::column('issue')->type('text');
+        CRUD::column('improvement')->type('text');
+        CRUD::column('recomendation')->type('text');
+        CRUD::column('newdevelop')->type('table')->columns([
+            'what' => 'What is that',
+            'duedate' => 'Due date',
+            'projectname' => 'Project Name',
+            'requestedby' => 'Requested by',
+        ]);
+        CRUD::column('additionalreq')->type('table')->columns([
+            'indevelop' => 'In Development',
+            'additional' => 'Additional Requirement',
+            'acceptable' => 'Acceptable (X)',
+            'unacceptable' => 'Unacceptable (x) Why?',
+        ]);
+        CRUD::column('developpipeline')->type('table')->columns([
+            'nameproject' => 'Name of Project',
+            'stage' => 'Stage',
+            'duedate' => 'Due date',
+            'additional' => 'Additional information',
+        ]);
+        CRUD::column('activitiespastweek')->type('table')->columns([
+            'activity' => 'Activity',
+        ]);
+        CRUD::column('activitiesnextweek')->type('table')->columns([
+            'activity' => 'Activity',
+        ]);
     }
 
     /**
      * Define what happens when the Create operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-create
      * @return void
      */
@@ -58,23 +81,51 @@ class WeeklyReportCrudController extends CrudController
     {
         CRUD::setValidation(WeeklyReportRequest::class);
 
-        CRUD::setFromDb(); // fields
-
-        /**
-         * Fields can be defined using the fluent syntax or array syntax:
-         * - CRUD::field('price')->type('number');
-         * - CRUD::addField(['name' => 'price', 'type' => 'number'])); 
-         */
+        CRUD::field('user_id')->type('select2')->entity('userId')->attribute('name')->model('App\Models\User');
+        CRUD::field('position_id')->type('select2')->entity('positionId')->attribute('name')->model('App\Models\Position');
+        CRUD::field('roadblock')->type('textarea');
+        CRUD::field('issue')->type('textarea');
+        CRUD::field('improvement')->type('textarea');
+        CRUD::field('recomendation')->type('textarea');
+        CRUD::field('newdevelop')->type('table')->entity_singular('New Development')->columns([
+            'what' => 'What is that',
+            'duedate' => 'Due date',
+            'projectname' => 'Project Name',
+            'requestedby' => 'Requested by',
+        ])->min(1)->label('New Development :');
+        CRUD::field('additionalreq')->type('table')->entity_singular('Additional requirement')->columns([
+            'indevelop' => 'In Development',
+            'additional' => 'Additional Requirement',
+            'acceptable' => 'Acceptable (X)',
+            'unacceptable' => 'Unacceptable (x) Why?',
+        ])->min(1)->label('Additional requirement from existing development :');
+        CRUD::field('developpipeline')->type('table')->entity_singular('Development pipeline')->columns([
+            'nameproject' => 'Name of Project',
+            'stage' => 'Stage',
+            'duedate' => 'Due date',
+            'additional' => 'Additional information',
+        ])->min(1)->label('Development pipeline :');
+        CRUD::field('activitiespastweek')->type('table')->entity_singular('Activity')->columns([
+            'activity' => 'Activity',
+        ])->min(1)->label('Top activities past week :');
+        CRUD::field('activitiesnextweek')->type('table')->entity_singular('Activity')->columns([
+            'activity' => 'Activity',
+        ])->min(1)->label('Top activities next week :');
     }
 
     /**
      * Define what happens when the Update operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-update
      * @return void
      */
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
+    }
+
+    protected function setupShowOperation()
+    {
+        $this->setupListOperation();
     }
 }

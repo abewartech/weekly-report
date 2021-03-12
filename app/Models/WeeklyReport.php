@@ -28,6 +28,15 @@ class WeeklyReport extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
+    public function userId()
+    {
+        return $this->belongsTo('App\Models\User', 'user_id');
+    }
+
+    public function positionId()
+    {
+        return $this->belongsTo('App\Models\Position', 'position_id');
+    }
 
     /*
     |--------------------------------------------------------------------------

@@ -19,10 +19,10 @@ class HelperController extends Controller
             ->select('activitiespastweek')->first();
             if($week){
                 $dataChart[] = count(json_decode($week->activitiespastweek));
-                $fixuser[] = mb_strimwidth($item->name, 0, 13, "...");
+                $fixuser[] = mb_strimwidth($item->name, 0, 15, "...");
             }else{
                 $dataChart[] = 0;
-                $fixuser[] = mb_strimwidth($item->name, 0, 13, "...");
+                $fixuser[] = mb_strimwidth($item->name, 0, 15, "...");
             }
         }
 

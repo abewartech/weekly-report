@@ -47,6 +47,7 @@ class WeeklyReportCrudController extends CrudController
         CRUD::column('roadblock')->type('text');
         CRUD::column('issue')->type('text');
         CRUD::column('improvement')->type('text');
+        CRUD::column('created_at')->type('text')->label('Timestamp');
         CRUD::column('recomendation')->type('text');
         CRUD::column('newdevelop')->type('table')->columns([
             'what' => 'What is that',

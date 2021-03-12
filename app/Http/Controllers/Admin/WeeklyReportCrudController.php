@@ -53,25 +53,25 @@ class WeeklyReportCrudController extends CrudController
             'duedate' => 'Due date',
             'projectname' => 'Project Name',
             'requestedby' => 'Requested by',
-        ]);
+        ])->label('New Development');
         CRUD::column('additionalreq')->type('table')->columns([
             'indevelop' => 'In Development',
             'additional' => 'Additional Requirement',
             'acceptable' => 'Acceptable (X)',
             'unacceptable' => 'Unacceptable (x) Why?',
-        ]);
+        ])->label('Additional requirement');
         CRUD::column('developpipeline')->type('table')->columns([
             'nameproject' => 'Name of Project',
             'stage' => 'Stage',
             'duedate' => 'Due date',
             'additional' => 'Additional information',
-        ]);
+        ])->label('Development pipeline');
         CRUD::column('activitiespastweek')->type('table')->columns([
             'activity' => 'Activity',
-        ]);
+        ])->label('Top activities past week');
         CRUD::column('activitiesnextweek')->type('table')->columns([
             'activity' => 'Activity',
-        ]);
+        ])->label('Top activities next week');
         $this->crud->addFilter([
             'name' => 'user_id',
             'type' => 'select2',

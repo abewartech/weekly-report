@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\WeeklyReportRequest;
+use App\Models\Position;
+use App\Models\User;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
@@ -39,6 +41,7 @@ class WeeklyReportCrudController extends CrudController
      */
     protected function setupListOperation()
     {
+        $this->crud->enableExportButtons();
         CRUD::column('user_id')->type('select')->entity('userId')->attribute('name')->model('App\Models\User');
         CRUD::column('position_id')->type('select')->entity('positionId')->attribute('name')->model('App\Models\Position');
         CRUD::column('roadblock')->type('text');
@@ -69,6 +72,30 @@ class WeeklyReportCrudController extends CrudController
         CRUD::column('activitiesnextweek')->type('table')->columns([
             'activity' => 'Activity',
         ]);
+        $this->crud->addFilter([
+            'name' => 'user_id',
+            'type' => 'select2',
+            'label' => 'User',
+        ], function () {
+            return User::all()->pluck('name', 'id')->toArray();
+        }, function ($value) {
+            $value = json_decode($value);
+            if (!empty($value)) {
+                $this->crud->addClause('where', 'user_id', $value);
+            }
+        });
+        $this->crud->addFilter([
+            'name' => 'position_id',
+            'type' => 'select2',
+            'label' => 'Position',
+        ], function () {
+            return Position::all()->pluck('name', 'id')->toArray();
+        }, function ($value) {
+            $value = json_decode($value);
+            if (!empty($value)) {
+                $this->crud->addClause('where', 'position_id', $value);
+            }
+        });
     }
 
     /**

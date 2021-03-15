@@ -2,8 +2,13 @@
 	@if (!$crud->model->translationEnabled())
 
 	<!-- Single edit button -->
+	@if($entry->user_id)
+	@if($entry->user_id == backpack_user()->id)
 	<a href="{{ url($crud->route.'/'.$entry->getKey().'/edit') }}" class="btn btn-sm btn-link"><i class="la la-edit"></i> {{ trans('backpack::crud.edit') }}</a>
-
+	@endif
+	@else
+	<a href="{{ url($crud->route.'/'.$entry->getKey().'/edit') }}" class="btn btn-sm btn-link"><i class="la la-edit"></i> {{ trans('backpack::crud.edit') }}</a>
+	@endif
 	@else
 
 	<!-- Edit button group -->

@@ -69,9 +69,11 @@ class WeeklyReportCrudController extends CrudController
         ])->label('Development pipeline');
         CRUD::column('activitiespastweek')->type('table')->columns([
             'activity' => 'Activity',
+            'date' => 'Date',
         ])->label('Top activities past week');
         CRUD::column('activitiesnextweek')->type('table')->columns([
             'activity' => 'Activity',
+            'date' => 'Date',
         ])->label('Top activities next week');
         $this->crud->addFilter([
             'name' => 'user_id',

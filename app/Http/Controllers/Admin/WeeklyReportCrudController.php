@@ -137,9 +137,11 @@ class WeeklyReportCrudController extends CrudController
         ])->min(1)->label('Development pipeline :');
         CRUD::field('activitiespastweek')->type('table')->entity_singular('Activity')->columns([
             'activity' => 'Activity',
+            'date' => 'Date',
         ])->min(1)->label('Top activities past week :');
         CRUD::field('activitiesnextweek')->type('table')->entity_singular('Activity')->columns([
             'activity' => 'Activity',
+            'date' => 'Date',
         ])->min(1)->label('Top activities next week :');
     }
 

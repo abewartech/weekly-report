@@ -1,5 +1,11 @@
 @if ($crud->hasAccess('delete'))
+@if($entry->user_id)
+@if($entry->user_id == backpack_user()->id)
 	<a href="javascript:void(0)" onclick="deleteEntry(this)" data-route="{{ url($crud->route.'/'.$entry->getKey()) }}" class="btn btn-sm btn-link" data-button-type="delete"><i class="la la-trash"></i> {{ trans('backpack::crud.delete') }}</a>
+	@endif
+	@else
+	<a href="javascript:void(0)" onclick="deleteEntry(this)" data-route="{{ url($crud->route.'/'.$entry->getKey()) }}" class="btn btn-sm btn-link" data-button-type="delete"><i class="la la-trash"></i> {{ trans('backpack::crud.delete') }}</a>
+@endif
 @endif
 
 {{-- Button Javascript --}}

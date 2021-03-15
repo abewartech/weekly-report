@@ -45,6 +45,10 @@ class WeeklyReportCrudController extends CrudController
         CRUD::column('user_id')->type('select')->entity('userId')->attribute('name')->model('App\Models\User');
         CRUD::column('position_id')->type('select')->entity('positionId')->attribute('name')->model('App\Models\Position');
         CRUD::column('created_at')->type('text')->label('Timestamp');
+        CRUD::column('activitiespastweek')->type('table')->columns([
+            'activity' => 'Activity',
+            'date' => 'Date',
+        ])->label('Top activities past week');
         CRUD::column('roadblock')->type('text');
         CRUD::column('issue')->type('text');
         CRUD::column('improvement')->type('text');
@@ -67,10 +71,6 @@ class WeeklyReportCrudController extends CrudController
             'duedate' => 'Due date',
             'additional' => 'Additional information',
         ])->label('Development pipeline');
-        CRUD::column('activitiespastweek')->type('table')->columns([
-            'activity' => 'Activity',
-            'date' => 'Date',
-        ])->label('Top activities past week');
         CRUD::column('activitiesnextweek')->type('table')->columns([
             'activity' => 'Activity',
             'date' => 'Date',
@@ -111,38 +111,38 @@ class WeeklyReportCrudController extends CrudController
     {
         CRUD::setValidation(WeeklyReportRequest::class);
 
-        CRUD::field('user_id')->type('select2')->entity('userId')->attribute('name')->model('App\Models\User');
-        CRUD::field('position_id')->type('select2')->entity('positionId')->attribute('name')->model('App\Models\Position');
-        CRUD::field('roadblock')->type('textarea');
-        CRUD::field('issue')->type('textarea');
-        CRUD::field('improvement')->type('textarea');
-        CRUD::field('recomendation')->type('textarea');
+        CRUD::field('user_id')->type('select2')->entity('userId')->attribute('name')->model('App\Models\User')->tab('Mandatory');
+        CRUD::field('position_id')->type('select2')->entity('positionId')->attribute('name')->model('App\Models\Position')->tab('Mandatory');
+        CRUD::field('activitiespastweek')->type('table')->entity_singular('Activity')->columns([
+            'activity' => 'Activity',
+            'date' => 'Date',
+        ])->min(1)->label('Top activities past week :')->tab('Mandatory');
+        CRUD::field('activitiesnextweek')->type('table')->entity_singular('Activity')->columns([
+            'activity' => 'Activity',
+            'date' => 'Date',
+        ])->min(1)->label('Top activities next week :')->tab('Mandatory');
+        CRUD::field('roadblock')->type('textarea')->tab('Additional');
+        CRUD::field('issue')->type('textarea')->tab('Additional');
+        CRUD::field('improvement')->type('textarea')->tab('Additional');
+        CRUD::field('recomendation')->type('textarea')->tab('Additional');
         CRUD::field('newdevelop')->type('table')->entity_singular('New Development')->columns([
             'what' => 'What is that',
             'duedate' => 'Due date',
             'projectname' => 'Project Name',
             'requestedby' => 'Requested by',
-        ])->min(1)->label('New Development :');
+        ])->min(1)->label('New Development :')->tab('Additional');
         CRUD::field('additionalreq')->type('table')->entity_singular('Additional requirement')->columns([
             'indevelop' => 'In Development',
             'additional' => 'Additional Requirement',
             'acceptable' => 'Acceptable (X)',
             'unacceptable' => 'Unacceptable (x) Why?',
-        ])->min(1)->label('Additional requirement from existing development :');
+        ])->min(1)->label('Additional requirement from existing development :')->tab('Additional');
         CRUD::field('developpipeline')->type('table')->entity_singular('Development pipeline')->columns([
             'nameproject' => 'Name of Project',
             'stage' => 'Stage',
             'duedate' => 'Due date',
             'additional' => 'Additional information',
-        ])->min(1)->label('Development pipeline :');
-        CRUD::field('activitiespastweek')->type('table')->entity_singular('Activity')->columns([
-            'activity' => 'Activity',
-            'date' => 'Date',
-        ])->min(1)->label('Top activities past week :');
-        CRUD::field('activitiesnextweek')->type('table')->entity_singular('Activity')->columns([
-            'activity' => 'Activity',
-            'date' => 'Date',
-        ])->min(1)->label('Top activities next week :');
+        ])->min(1)->label('Development pipeline :')->tab('Additional');
     }
 
     /**
